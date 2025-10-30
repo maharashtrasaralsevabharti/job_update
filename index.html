@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Maharashtra Saral Seva Bharti - Dynamic</title>
-  <meta name="description" content="सरकारी नोकरी व अभ्यास मार्गदर्शन — Dynamic Version">
+  <title>Maharashtra Saral Seva Bharti</title>
+  <meta name="description" content="सरकारी नोकरी, स्टडी नोट्स आणि भरती अपडेट्स">
   <style>
     :root {
       --accent: #ff6600;
@@ -61,53 +61,25 @@
   </header>
 
   <main class="container">
-    <div class="banner">नवीन भरती अपडेट्स उपलब्ध आहेत! 👇</div>
+    <div class="banner">🔥 नवीन भरती व PDF अपडेट्स पहा खाली 👇</div>
+
     <section class="hero">
       <div class="left">
         <h1>सरकारी नोकऱ्या आणि अभ्यासाचा सोपा मार्ग</h1>
-        <p>ताज्या भरतींची माहिती, तयारीचे प्लॅन्स, आणि शॉर्टकट स्टडी टिप्स — सर्व मराठीत. सुरुवात करण्यासाठी खालील नोटिफिकेशन सबस्क्राइब करा.</p>
+        <p>ताज्या भरतींची माहिती, तयारीचे प्लॅन्स, आणि शॉर्टकट स्टडी टिप्स — सर्व मराठीत.</p>
         <a class="btn" href="#subscribe">नोटिफाय मला</a>
         <a class="btn" style="margin-left:8px;background:red;" href="https://youtube.com/@saralsevabhartiupdate?si=YWVP8fjWFiYyfsHi" target="_blank">🎥 YouTube वर पाहा</a>
       </div>
     </section>
 
     <section id="jobs" style="margin-top:22px">
-      <!-- Dynamic Job Cards Rendered Here -->
-    </section>
-
-    <section id="study" style="margin-top:22px">
-      <h2 style="color:var(--accent-dark)">Study Tips</h2>
-      <div class="grid">
-        <div class="card">
-          <div style="font-weight:800">दररोज 2 तास प्लॅन</div>
-          <p class="muted">स्टडी ब्रेक्ससह आणि रिव्हिजन शेड्युलसह.</p>
-        </div>
-        <div class="card">
-          <div style="font-weight:800">PDF नोट्स</div>
-          <p class="muted">डाउनलोड करण्यायोग्य संक्षेप पुस्तिका.</p>
-        </div>
-      </div>
+      <h2 style="color:var(--accent-dark)">नवीन भरती</h2>
+      <div id="jobs-grid" class="grid"></div>
     </section>
 
     <section id="pdf" style="margin-top:22px">
-      <h2 style="color:var(--accent-dark)">Downloads / PDF Notes</h2>
-      <div class="grid">
-        <div class="card">
-          <div style="font-weight:800">MPSC Preparation Notes (PDF)</div>
-          <p class="muted">अभ्यासासाठी संक्षिप्त PDF नोट्स डाउनलोड करा.</p>
-          <a href="#" class="btn">Download</a>
-        </div>
-        <div class="card">
-          <div style="font-weight:800">Current Affairs 2025 (PDF)</div>
-          <p class="muted">साप्ताहिक चालू घडामोडींचे सारांश.</p>
-          <a href="#" class="btn">Download</a>
-        </div>
-        <div class="card">
-          <div style="font-weight:800">Study Time Table (PDF)</div>
-          <p class="muted">अभ्यासाचे वेळापत्रक व प्लॅनिंग शीट.</p>
-          <a href="#" class="btn">Download</a>
-        </div>
-      </div>
+      <h2 style="color:var(--accent-dark)">PDF Downloads</h2>
+      <div id="pdf-grid" class="grid"></div>
     </section>
 
     <section id="subscribe" style="margin-top:22px">
@@ -125,25 +97,41 @@
 
   <footer>
     <div class="container">
-      © 2025 Maharashtra Saral Seva Bharti · Designed with ❤️ by ChatGPT
+      © 2025 Maharashtra Saral Seva Bharti · Designed by Vaijinath Golhar
     </div>
   </footer>
 
   <script>
+    // Load Jobs
     fetch('jobs.json')
-      .then(response => response.json())
+      .then(res => res.json())
       .then(data => {
-        const jobsSection = document.getElementById('jobs');
-        const grid = document.createElement('div');
-        grid.className = 'grid';
+        const jobsGrid = document.getElementById('jobs-grid');
         data.forEach(job => {
           const card = document.createElement('div');
           card.className = 'card';
           card.innerHTML = `<div style="font-weight:800">${job.title}</div><p class="muted">Last Date: ${job.lastDate}</p><p>${job.desc}</p>`;
-          grid.appendChild(card);
+          jobsGrid.appendChild(card);
         });
-        jobsSection.innerHTML = '<h2 style="color:var(--accent-dark)">नवीन भरती</h2>';
-        jobsSection.appendChild(grid);
+      })
+      .catch(() => {
+        document.getElementById('jobs-grid').innerHTML = '<p class="muted">Job data लोड झाला नाही.</p>';
+      });
+
+    // Load PDFs
+    fetch('pdfs.json')
+      .then(res => res.json())
+      .then(data => {
+        const pdfGrid = document.getElementById('pdf-grid');
+        data.forEach(pdf => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `<div style="font-weight:800">${pdf.title}</div><p class="muted">${pdf.desc}</p><a href="${pdf.link}" target="_blank" class="btn">Download</a>`;
+          pdfGrid.appendChild(card);
+        });
+      })
+      .catch(() => {
+        document.getElementById('pdf-grid').innerHTML = '<p class="muted">PDF data लोड झाला नाही.</p>';
       });
   </script>
 </body>
