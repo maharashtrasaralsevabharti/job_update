@@ -1,17 +1,12 @@
 [
   {
-    "title": "MPSC Preparation Notes (PDF)",
-    "desc": "अभ्यासासाठी संक्षिप्त नोट्स डाउनलोड करा.",
+    "title": "MPSC तयारी नोट्स (PDF)",
+    "desc": "पूर्ण अभ्यासक्रमाच्या नोट्स.",
     "link": "https://example.com/mpsc.pdf"
   },
   {
-    "title": "Current Affairs October 2025 (PDF)",
-    "desc": "चालू घडामोडींचा मासिक सारांश.",
+    "title": "Current Affairs October 2025",
+    "desc": "ऑक्टोबर महिन्याचे महत्वाचे प्रश्नोत्तर संच.",
     "link": "https://example.com/current.pdf"
-  },
-  {
-    "title": "Study Time Table (PDF)",
-    "desc": "अभ्यासाचे वेळापत्रक व प्लॅनिंग शीट.",
-    "link": "https://example.com/timetable.pdf"
   }
 ]
