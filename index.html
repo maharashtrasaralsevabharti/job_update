@@ -1,87 +1,340 @@
+Below are the ready-to-upload files for **Maharashtra Saral Seva Bharti — Version 3.5 (Full Admin Portal)**.
+
+**Instructions (quick):**
+
+1. In your repository folder `job_update/` create these files exactly as named: `index.html`, `admin.html`, `jobs.json`, `pdfs.json`.
+2. Commit and push. Open:
+
+   * Main site: `https://<your-username>.github.io/job_update/` (index.html)
+   * Admin panel: `https://<your-username>.github.io/job_update/admin.html`
+3. Admin password (set by you): **Pass@100** (already inserted in the code)
+
+---
+
+--- FILE: index.html ---
+
+```html
 <!DOCTYPE html>
 <html lang="mr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>महाराष्ट्र सरळ सेवा भरती - Job Portal V3</title>
-  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/4/46/Emblem_of_India.svg">
+  <title>महाराष्ट्र सरळ सेवा भरती - Job Portal V3.5</title>
   <style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-    body{background:#fffdf8;color:#222;transition:0.3s;}
-    body.dark{background:#121212;color:#f1f1f1;}
-    header{background:linear-gradient(90deg,#ff3c00,#ff7b00);color:#fff;text-align:center;padding:1.2rem;}
-    header h1{font-size:1.8rem;}
-    nav{text-align:center;background:#fff3e0;padding:0.8rem;}
-    nav a{margin:0 1rem;color:#e65100;text-decoration:none;font-weight:600;}
-    nav a:hover{text-decoration:underline;}
-    .switch{float:right;margin-right:20px;cursor:pointer;font-size:0.9rem;color:#333;}
-    .switch:hover{color:#ff6d00;}
-    main{max-width:900px;margin:2rem auto;padding:0 1rem;}
-    h2{color:#e65100;margin-bottom:1rem;border-left:6px solid #ff6d00;padding-left:10px;}
-    .card{background:#fff;padding:1rem;border-radius:10px;margin-bottom:1rem;box-shadow:0 2px 6px rgba(0,0,0,0.1);}
-    body.dark .card{background:#1e1e1e;}
-    .card h3{color:#bf360c;}
-    footer{text-align:center;background:#ff6d00;color:#fff;padding:1rem;margin-top:2rem;}
-    .add-btn{display:inline-block;margin-top:1rem;padding:0.4rem 0.8rem;background:#ff6d00;color:#fff;border-radius:6px;text-decoration:none;}
+    *{box-sizing:border-box;font-family:Arial, sans-serif}
+    body{background:#fffdf8;color:#222;margin:0;transition:background .2s;color-scheme:light}
+    header{background:linear-gradient(90deg,#ff8a00,#ff3c00);color:#fff;padding:1rem;text-align:center}
+    header h1{margin:0;font-size:1.6rem}
+    nav{background:#fff3e0;padding:0.6rem;text-align:center;border-bottom:1px solid #ffe5cc}
+    nav a{color:#e65100;margin:0 0.8rem;text-decoration:none;font-weight:600}
+    main{max-width:1000px;margin:1.6rem auto;padding:0 1rem}
+    h2{color:#e65100;border-left:5px solid #ff6d00;padding-left:10px}
+    .controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+    .search{flex:1;min-width:180px;padding:8px;border:2px solid #ffd1b3;border-radius:6px}
+    .card{background:#fff;padding:12px;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.06);margin-bottom:10px}
+    .card h3{margin:0 0 6px;color:#bf360c}
+    .btn{display:inline-block;padding:8px 10px;background:#ff6d00;color:#fff;border-radius:6px;text-decoration:none;font-weight:700}
+    .small{font-size:0.85rem;color:#666}
+    footer{text-align:center;background:#ff6d00;color:#fff;padding:0.9rem;margin-top:18px}
+    .pdf-link{display:inline-block;margin-top:8px;padding:6px 10px;background:#ff7b00;color:#fff;border-radius:6px;text-decoration:none}
+    .muted{color:#666;font-size:0.9rem}
+    @media (max-width:600px){.controls{flex-direction:column}}
   </style>
 </head>
 <body>
   <header>
     <h1>🔥 महाराष्ट्र सरळ सेवा भरती</h1>
-    <p>Live Job Updates | PDF Notes | Auto News Feed</p>
-    <span class="switch" onclick="toggleTheme()">🌓 Mode</span>
+    <div class="muted">Live Job Updates · PDF Notes · Admin Panel</div>
   </header>
 
   <nav>
     <a href="#jobs">Jobs</a>
-    <a href="#pdfs">PDF</a>
+    <a href="#pdfs">PDFs</a>
     <a href="admin.html" target="_blank">Admin Panel</a>
   </nav>
 
   <main>
     <section id="jobs">
       <h2>📢 नवीन भरती अपडेट्स</h2>
-      <div id="job-list">Loading...</div>
+      <div class="controls">
+        <input id="search" class="search" placeholder="भरती शोधा (उदा. MPSC, Police)" />
+        <a class="btn" href="#pdfs">PDFs</a>
+      </div>
+      <div id="job-list">लोड करत आहे...</div>
+    </section>
+
+    <section id="pdfs" style="margin-top:18px">
+      <h2>📚 PDF Downloads</h2>
+      <div id="pdf-list">लोड करत आहे...</div>
+      <div class="muted" style="margin-top:8px">टीप: जर तुम्ही Admin मधून फाइल अपलोड केली तर ती ब्राउझर localStorage मध्ये राहील—recommended: मोठ्या PDF साठी GitHub किंवा Google Drive वर अपलोड करून लिंक वापरा.</div>
     </section>
   </main>
 
-  <footer>
-    © 2025 Maharashtra Saral Seva Bharti | Auto Updated Portal
-  </footer>
+  <footer>© 2025 Maharashtra Saral Seva Bharti</footer>
 
   <script>
-    // Dark Mode Toggle
-    function toggleTheme(){
-      document.body.classList.toggle('dark');
-      localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
-    }
-    if(localStorage.getItem('theme')==='dark'){document.body.classList.add('dark');}
-
-    // Load Jobs (from localStorage or jobs.json)
-    const savedJobs = JSON.parse(localStorage.getItem('jobs') || '[]');
-    const jobList = document.getElementById('job-list');
-    function renderJobs(jobs){
-      jobList.innerHTML='';
-      if(!jobs.length){jobList.innerHTML='❌ कोणतेही अपडेट उपलब्ध नाही';return;}
-      jobs.forEach(j=>{
-        const div=document.createElement('div');
-        div.className='card';
-        div.innerHTML=`<h3>${j.title}</h3>
-                       <p>${j.desc}</p>
-                       <p><strong>अंतिम तारीख:</strong> ${j.lastDate}</p>`;
-        jobList.appendChild(div);
-      });
-    }
-    if(savedJobs.length){renderJobs(savedJobs);}
-    else {
-      fetch('jobs.json').then(r=>r.json()).then(d=>renderJobs(d));
+    // Utility: read JSON file from repo (fallback)
+    async function fetchJSON(name){
+      try{
+        const r = await fetch(name + '?cache=' + Date.now());
+        if(!r.ok) throw new Error('no');
+        return await r.json();
+      }catch(e){return []}
     }
 
-    // Auto refresh every 30 sec (simulate news feed)
-    setInterval(()=>{
-      const updated = JSON.parse(localStorage.getItem('jobs') || '[]');
-      renderJobs(updated);
-    },30000);
+    // Load jobs from localStorage first, else jobs.json
+    async function loadJobs(){
+      const local = JSON.parse(localStorage.getItem('ms_jobs') || 'null');
+      const jobs = local || await fetchJSON('jobs.json');
+      renderJobs(jobs);
+    }
+
+    function renderJobs(list){
+      const container = document.getElementById('job-list');
+      container.innerHTML='';
+      if(!list || !list.length){container.innerHTML='<div class="muted">कोणतेही अपडेट उपलब्ध नाहीत.</div>';return}
+      list.forEach(j=>{
+        const d = document.createElement('div'); d.className='card';
+        d.innerHTML=`<h3>${escapeHtml(j.title)}</h3>
+                    <p class="small">${escapeHtml(j.desc)}</p>
+                    <p><strong>अंतिम तारीख:</strong> ${escapeHtml(j.lastDate)}</p>`;
+        container.appendChild(d);
+      })
+    }
+
+    // PDFs
+    async function loadPDFs(){
+      const local = JSON.parse(localStorage.getItem('ms_pdfs') || 'null');
+      const pdfs = local || await fetchJSON('pdfs.json');
+      renderPDFs(pdfs);
+    }
+    function renderPDFs(list){
+      const container = document.getElementById('pdf-list'); container.innerHTML='';
+      if(!list || !list.length){container.innerHTML='<div class="muted">कोणतीही PDF उपलब्ध नाही.</div>';return}
+      list.forEach(p=>{
+        const d=document.createElement('div'); d.className='card';
+        let link = p.link || '#';
+        d.innerHTML=`<h3>${escapeHtml(p.title)}</h3>
+                    <p class="small">${escapeHtml(p.desc)}</p>
+                    <a class="pdf-link" href="${link}" target="_blank">Download</a>`;
+        container.appendChild(d);
+      })
+    }
+
+    // Search
+    document.getElementById('search').addEventListener('input', e=>{
+      const q = e.target.value.trim().toLowerCase();
+      const jobs = JSON.parse(localStorage.getItem('ms_jobs') || 'null') || null;
+      (async()=>{
+        const list = jobs || await fetchJSON('jobs.json');
+        const filtered = list.filter(x=> (x.title+x.desc).toLowerCase().includes(q));
+        renderJobs(filtered);
+      })();
+    });
+
+    // simple escape
+    function escapeHtml(s){ return String(s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+    // Auto-refresh (simulate news feed) every 20s
+    setInterval(()=>{ loadJobs(); loadPDFs(); },20000);
+
+    // initial load
+    loadJobs(); loadPDFs();
   </script>
 </body>
 </html>
+```
+
+--- FILE: admin.html ---
+
+```html
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Maharashtra Saral Seva Bharti</title>
+  <style>
+    *{box-sizing:border-box;font-family:Arial, sans-serif}
+    body{background:#fffdf8;padding:12px;color:#222}
+    h2{color:#e65100;text-align:center}
+    form{max-width:700px;margin:10px auto;background:#fff;padding:12px;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,0.06)}
+    input,textarea,select{width:100%;padding:8px;margin-bottom:8px;border:1px solid #ddd;border-radius:6px}
+    .row{display:flex;gap:8px}
+    .row .col{flex:1}
+    button{background:#ff6d00;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer}
+    .muted{color:#666;font-size:0.9rem}
+    .list{max-width:700px;margin:12px auto}
+    .item{background:#fff;padding:10px;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.04);margin-bottom:8px}
+    .actions{margin-top:6px}
+    .danger{background:#d32f2f}
+  </style>
+</head>
+<body>
+  <h2>Admin Panel — Job & PDF Management</h2>
+
+  <form id="authForm">
+    <input id="passwd" type="password" placeholder="Enter Admin Password" required>
+    <button type="submit">Unlock Admin</button>
+    <div class="muted">Admin Password already set to the value you chose.</div>
+  </form>
+
+  <div id="adminArea" style="display:none">
+
+    <form id="jobForm">
+      <h3>Add New Job</h3>
+      <input id="jobTitle" placeholder="Job Title" required>
+      <textarea id="jobDesc" placeholder="Short description" required></textarea>
+      <div class="row">
+        <div class="col"><input id="jobDate" placeholder="Last Date (e.g. 20 Nov 2025)" required></div>
+        <div class="col"><button id="addJobBtn" type="button">Add Job</button></div>
+      </div>
+    </form>
+
+    <form id="pdfForm">
+      <h3>Add PDF (URL or Upload)</h3>
+      <input id="pdfTitle" placeholder="PDF Title" required>
+      <input id="pdfDesc" placeholder="Short description">
+      <input id="pdfUrl" placeholder="PDF URL (or leave empty to upload file)">
+      <input id="pdfFile" type="file" accept="application/pdf">
+      <div class="row">
+        <div class="col"><button id="addPdfBtn" type="button">Add PDF</button></div>
+        <div class="col"><button id="clearStorage" type="button" style="background:#888">Clear Local Storage</button></div>
+      </div>
+      <div class="muted">Note: Upload stores PDF as data URL in browser localStorage — works but not ideal for large files. For persistent hosting, upload PDFs to GitHub/Drive and paste URL.</div>
+    </form>
+
+    <div class="list">
+      <h3>Existing Jobs</h3>
+      <div id="jobsList"></div>
+      <h3>Existing PDFs</h3>
+      <div id="pdfsList"></div>
+    </div>
+  </div>
+
+  <script>
+    const ADMIN_PASS='Pass@100'; // set by you
+    const authForm=document.getElementById('authForm');
+    const adminArea=document.getElementById('adminArea');
+
+    authForm.addEventListener('submit',e=>{
+      e.preventDefault();
+      const p=document.getElementById('passwd').value;
+      if(p!==ADMIN_PASS){alert('Wrong password');return}
+      authForm.style.display='none'; adminArea.style.display='block'; loadAll();
+    });
+
+    // Helpers
+    function saveJobs(j){ localStorage.setItem('ms_jobs',JSON.stringify(j)); }
+    function savePdfs(p){ localStorage.setItem('ms_pdfs',JSON.stringify(p)); }
+    function getJobs(){ return JSON.parse(localStorage.getItem('ms_jobs')||'null') || [] }
+    function getPdfs(){ return JSON.parse(localStorage.getItem('ms_pdfs')||'null') || [] }
+
+    // Add Job
+    document.getElementById('addJobBtn').addEventListener('click',()=>{
+      const t=document.getElementById('jobTitle').value.trim();
+      const d=document.getElementById('jobDesc').value.trim();
+      const ld=document.getElementById('jobDate').value.trim();
+      if(!t||!d||!ld){alert('Fill all fields');return}
+      const list=getJobs(); list.unshift({title:t,desc:d,lastDate:ld}); saveJobs(list); renderJobs(); document.getElementById('jobForm').reset();
+    });
+
+    // Add PDF (URL or Upload)
+    document.getElementById('addPdfBtn').addEventListener('click',()=>{
+      const title=document.getElementById('pdfTitle').value.trim();
+      const desc=document.getElementById('pdfDesc').value.trim();
+      const url=document.getElementById('pdfUrl').value.trim();
+      const file=document.getElementById('pdfFile').files[0];
+      if(!title){alert('Enter title');return}
+      if(url){ // prefer URL
+        const list=getPdfs(); list.unshift({title:title,desc:desc,link:url}); savePdfs(list); renderPdfs(); document.getElementById('pdfForm').reset(); return;
+      }
+      if(file){
+        const reader=new FileReader();
+        reader.onload=function(e){
+          const dataUrl=e.target.result;
+          const list=getPdfs(); list.unshift({title:title,desc:desc,link:dataUrl}); savePdfs(list); renderPdfs(); document.getElementById('pdfForm').reset();
+        };
+        reader.readAsDataURL(file);
+        return;
+      }
+      alert('Provide a PDF URL or choose a file to upload');
+    });
+
+    // Clear local storage (for PDFs and jobs)
+    document.getElementById('clearStorage').addEventListener('click',()=>{
+      if(!confirm('Delete all saved jobs & PDFs from this browser?')) return;
+      localStorage.removeItem('ms_jobs'); localStorage.removeItem('ms_pdfs'); loadAll(); alert('Cleared');
+    });
+
+    // Render lists with delete
+    function renderJobs(){
+      const el=document.getElementById('jobsList'); el.innerHTML='';
+      const list=getJobs(); if(!list.length){el.innerHTML='<div class="muted">No jobs saved</div>';return}
+      list.forEach((j,i)=>{
+        const d=document.createElement('div'); d.className='item';
+        d.innerHTML=`<strong>${escapeHtml(j.title)}</strong><div class="small">${escapeHtml(j.desc)}</div><div class="small">${escapeHtml(j.lastDate)}</div>`;
+        const act=document.createElement('div'); act.className='actions';
+        const del=document.createElement('button'); del.textContent='Delete'; del.style.marginRight='6px'; del.onclick=()=>{ if(confirm('Delete this job?')){ list.splice(i,1); saveJobs(list); renderJobs(); }};
+        act.appendChild(del);
+        d.appendChild(act); el.appendChild(d);
+      })
+    }
+
+    function renderPdfs(){
+      const el=document.getElementById('pdfsList'); el.innerHTML='';
+      const list=getPdfs(); if(!list.length){el.innerHTML='<div class="muted">No PDFs saved</div>';return}
+      list.forEach((p,i)=>{
+        const d=document.createElement('div'); d.className='item';
+        const link = p.link ? (p.link.startsWith('data:') ? '<em>(uploaded file)</em>' : `<a href="${p.link}" target="_blank">Open</a>`) : '';
+        d.innerHTML=`<strong>${escapeHtml(p.title)}</strong><div class="small">${escapeHtml(p.desc)}</div><div class="small">${link}</div>`;
+        const del=document.createElement('button'); del.textContent='Delete'; del.className='danger'; del.style.marginTop='6px'; del.onclick=()=>{ if(confirm('Delete this PDF?')){ list.splice(i,1); savePdfs(list); renderPdfs(); }};
+        d.appendChild(del); el.appendChild(d);
+      })
+    }
+
+    function loadAll(){ renderJobs(); renderPdfs(); }
+    function escapeHtml(s){ return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])); }
+  </script>
+</body>
+</html>
+```
+
+--- FILE: jobs.json ---
+
+```json
+[
+  {
+    "title": "MPSC Group-B Recruitment 2025",
+    "desc": "महाराष्ट्र गट-ब भरतीची अधिसूचना प्रकाशित.",
+    "lastDate": "20 Nov 2025"
+  }
+]
+```
+
+--- FILE: pdfs.json ---
+
+```json
+[
+  {
+    "title": "MPSC तयारी नोट्स (PDF)",
+    "desc": "पूर्ण अभ्यासक्रमाच्या नोट्स.",
+    "link": "https://example.com/mpsc.pdf"
+  }
+]
+```
+
+---
+
+**Important notes (read):**
+
+* Admin uploads store PDFs as `data:` URLs in the browser localStorage. That is convenient for quick use but is **not a replacement for proper hosting** — large PDFs will bloat localStorage and may be lost if user clears browser data.
+* Recommended workflow for persistent PDFs: upload PDF files to GitHub (in the repository), Google Drive (set public), or any static host and then paste the **public URL** in the Admin panel `PDF URL` field.
+* The Admin password is set to **Pass@100** in the `admin.html` file. You can edit it directly in the file if you want to change it.
+
+If you want, I can:
+
+* Push these files into your GitHub repo for you (you need to add me or do it manually) — or
+* Give step-by-step screenshots to upload each file.
+
+Ready — I created the files above. Upload them to `job_update/` and tell me when done; I will test and give final tweaks (search highlight, better styling, or analytics setup).
