@@ -1,138 +1,87 @@
 <!DOCTYPE html>
 <html lang="mr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>महाराष्ट्र सरळ सेवा भरती - Job Portal</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>महाराष्ट्र सरळ सेवा भरती - Job Portal V3</title>
   <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/4/46/Emblem_of_India.svg">
   <style>
-    * {margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif;}
-    body {background: #fffdf8; color: #222;}
-    header {
-      background: linear-gradient(90deg, #ff3c00, #ff7b00);
-      color: white; text-align: center; padding: 1.2rem;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
-    }
-    header h1 {font-size: 1.9rem; margin-bottom: 0.3rem;}
-    nav {
-      background: #fff3e0; text-align: center;
-      padding: 0.7rem; position: sticky; top: 0; z-index: 100;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    nav a {margin: 0 1rem; color: #e65100; text-decoration: none; font-weight: 600;}
-    nav a:hover {text-decoration: underline;}
-
-    main {max-width: 1000px; margin: 2rem auto; padding: 0 1rem;}
-
-    h2 {color: #e65100; border-left: 6px solid #ff6d00; padding-left: 10px; margin-bottom: 1rem;}
-
-    .search-box {margin-bottom: 1.5rem; text-align: center;}
-    .search-box input {
-      padding: 0.6rem 1rem; width: 80%; max-width: 400px;
-      border: 2px solid #ff6d00; border-radius: 8px; outline: none;
-    }
-
-    .card {background: #fff; padding: 1rem; border-radius: 10px; margin-bottom: 1rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1);}
-    .card:hover {transform: scale(1.01); transition: 0.2s;}
-    .card h3 {color: #bf360c; margin-bottom: 0.4rem;}
-    .card p {font-size: 0.9rem;}
-
-    .pdf-card a {
-      display: inline-block; background: #ff6d00; color: #fff;
-      padding: 0.4rem 0.8rem; border-radius: 6px; text-decoration: none; margin-top: 0.4rem;
-    }
-    .pdf-card a:hover {background: #e65100;}
-
-    iframe {width: 100%; height: 300px; border: none; border-radius: 10px; margin-top: 10px;}
-
-    form {background: #fff; padding: 1rem; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);}
-    form input, form textarea {
-      width: 100%; padding: 0.6rem; margin-bottom: 0.7rem; border: 1px solid #ccc; border-radius: 6px;
-    }
-    form button {
-      background: #ff6d00; color: white; border: none;
-      padding: 0.6rem 1.2rem; border-radius: 6px; cursor: pointer;
-    }
-    form button:hover {background: #e65100;}
-
-    footer {
-      text-align: center; background: #ff6d00; color: white;
-      padding: 1rem; margin-top: 2rem;
-    }
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body{background:#fffdf8;color:#222;transition:0.3s;}
+    body.dark{background:#121212;color:#f1f1f1;}
+    header{background:linear-gradient(90deg,#ff3c00,#ff7b00);color:#fff;text-align:center;padding:1.2rem;}
+    header h1{font-size:1.8rem;}
+    nav{text-align:center;background:#fff3e0;padding:0.8rem;}
+    nav a{margin:0 1rem;color:#e65100;text-decoration:none;font-weight:600;}
+    nav a:hover{text-decoration:underline;}
+    .switch{float:right;margin-right:20px;cursor:pointer;font-size:0.9rem;color:#333;}
+    .switch:hover{color:#ff6d00;}
+    main{max-width:900px;margin:2rem auto;padding:0 1rem;}
+    h2{color:#e65100;margin-bottom:1rem;border-left:6px solid #ff6d00;padding-left:10px;}
+    .card{background:#fff;padding:1rem;border-radius:10px;margin-bottom:1rem;box-shadow:0 2px 6px rgba(0,0,0,0.1);}
+    body.dark .card{background:#1e1e1e;}
+    .card h3{color:#bf360c;}
+    footer{text-align:center;background:#ff6d00;color:#fff;padding:1rem;margin-top:2rem;}
+    .add-btn{display:inline-block;margin-top:1rem;padding:0.4rem 0.8rem;background:#ff6d00;color:#fff;border-radius:6px;text-decoration:none;}
   </style>
 </head>
 <body>
   <header>
     <h1>🔥 महाराष्ट्र सरळ सेवा भरती</h1>
-    <p>Government Job Updates | Study PDFs | Contact Us</p>
+    <p>Live Job Updates | PDF Notes | Auto News Feed</p>
+    <span class="switch" onclick="toggleTheme()">🌓 Mode</span>
   </header>
 
   <nav>
-    <a href="#jobs">Job Updates</a>
-    <a href="#pdfs">PDF Section</a>
-    <a href="#youtube">YouTube</a>
-    <a href="#contact">Contact</a>
+    <a href="#jobs">Jobs</a>
+    <a href="#pdfs">PDF</a>
+    <a href="admin.html" target="_blank">Admin Panel</a>
   </nav>
 
   <main>
     <section id="jobs">
       <h2>📢 नवीन भरती अपडेट्स</h2>
-      <div class="search-box">
-        <input type="text" id="search" placeholder="भरती शोधा... (उदा. MPSC, Police, ZP)">
-      </div>
       <div id="job-list">Loading...</div>
-    </section>
-
-    <section id="pdfs">
-      <h2>📚 PDF विभाग</h2>
-      <div id="pdf-list">Loading...</div>
-    </section>
-
-    <section id="youtube">
-      <h2>▶️ आमचा YouTube चॅनेल</h2>
-      <p><a href="https://youtube.com/@saralsevabhartiupdate" target="_blank">@SaralSevaBhartiUpdate</a></p>
-      <iframe src="https://www.youtube.com/embed?listType=playlist&list=UU" allowfullscreen></iframe>
-    </section>
-
-    <section id="contact">
-      <h2>📩 संपर्क करा</h2>
-      <form name="contact-form" netlify>
-        <input type="text" name="name" placeholder="नाव" required>
-        <input type="email" name="email" placeholder="ईमेल" required>
-        <textarea name="message" rows="4" placeholder="आपला संदेश..." required></textarea>
-        <button type="submit">Submit</button>
-      </form>
     </section>
   </main>
 
   <footer>
-    © 2025 Maharashtra Saral Seva Bharti | Designed by Vaijinath Golhar
+    © 2025 Maharashtra Saral Seva Bharti | Auto Updated Portal
   </footer>
 
   <script>
-    // Load Job Data
-    let jobs = [];
-    fetch('jobs.json')
-      .then(r => r.json())
-      .then(data => {
-        jobs = data;
-        displayJobs(data);
-      })
-      .catch(() => document.getElementById('job-list').innerHTML = '❌ डेटा उपलब्ध नाही');
+    // Dark Mode Toggle
+    function toggleTheme(){
+      document.body.classList.toggle('dark');
+      localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+    }
+    if(localStorage.getItem('theme')==='dark'){document.body.classList.add('dark');}
 
-    function displayJobs(list) {
-      const jobList = document.getElementById('job-list');
-      jobList.innerHTML = '';
-      list.forEach(j => {
-        const div = document.createElement('div');
-        div.className = 'card';
-        div.innerHTML = `<h3>${j.title}</h3>
-                         <p>${j.desc}</p>
-                         <p><strong>अंतिम तारीख:</strong> ${j.lastDate}</p>`;
+    // Load Jobs (from localStorage or jobs.json)
+    const savedJobs = JSON.parse(localStorage.getItem('jobs') || '[]');
+    const jobList = document.getElementById('job-list');
+    function renderJobs(jobs){
+      jobList.innerHTML='';
+      if(!jobs.length){jobList.innerHTML='❌ कोणतेही अपडेट उपलब्ध नाही';return;}
+      jobs.forEach(j=>{
+        const div=document.createElement('div');
+        div.className='card';
+        div.innerHTML=`<h3>${j.title}</h3>
+                       <p>${j.desc}</p>
+                       <p><strong>अंतिम तारीख:</strong> ${j.lastDate}</p>`;
         jobList.appendChild(div);
       });
     }
+    if(savedJobs.length){renderJobs(savedJobs);}
+    else {
+      fetch('jobs.json').then(r=>r.json()).then(d=>renderJobs(d));
+    }
 
-    document.getElementById('search').addEventListener('input', e => {
-      const val = e.target.value.toLowerCase();
-      const filtered = jobs.filt
+    // Auto refresh every 30 sec (simulate news feed)
+    setInterval(()=>{
+      const updated = JSON.parse(localStorage.getItem('jobs') || '[]');
+      renderJobs(updated);
+    },30000);
+  </script>
+</body>
+</html>
