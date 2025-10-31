@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Job Portal</title>
+  <style>
+    body{font-family:'Poppins',sans-serif;background:#fffaf5;padding:1rem;}
+    h2{text-align:center;color:#e65100;}
+    form{max-width:500px;margin:1rem auto;background:#fff;padding:1rem;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.1);}
+    input,textarea{width:100%;padding:0.6rem;margin-bottom:0.6rem;border:1px solid #ccc;border-radius:6px;}
+    button{background:#ff6d00;color:#fff;border:none;padding:0.6rem 1rem;border-radius:6px;cursor:pointer;}
+    button:hover{background:#e65100;}
+    .job-preview{max-width:500px;margin:1rem auto;}
+    .job-item{background:#fff;padding:0.6rem;border-radius:6px;margin-bottom:0.5rem;box-shadow:0 1px 3px rgba(0,0,0,0.1);}
+  </style>
+</head>
+<body>
+  <h2>🛠 Admin Panel</h2>
+  <form id="addJobForm">
+    <input type="password" id="adminPass" placeholder="Enter Admin Password" required>
+    <input type="text" id="title" placeholder="Job Title" required>
+    <textarea id="desc" placeholder="Description" required></textarea>
+    <input type="text" id="lastDate" placeholder="Last Date (उदा. 20 Nov 2025)" required>
+    <button type="submit">Add Job</button>
+  </form>
+
+  <div class="job-preview" id="preview"></div>
+
+  <script>
+    const ADMIN_KEY="saral123"; // change this password
+    const form=document.getElementById('addJobForm');
+    const preview=document.getElementById('preview');
+
+    function renderList(){
+      const jobs=JSON.parse(localStorage.getItem('jobs')||'[]');
+      preview.innerHTML='';
+      jobs.forEach((j,i)=>{
+        const d=document.createElement('div');
+        d.className='job-item';
+        d.innerHTML=`<strong>${i+1}) ${j.title}</strong><br>${j.desc}<br><em>${j.lastDate}</em>`;
+        preview.appendChild(d);
+      });
+    }
+    renderList();
+
+    form.addEventListener('submit',e=>{
+      e.preventDefault();
+      const pass=document.getElementById('adminPass').value;
+      if(pass!==ADMIN_KEY){alert('❌ Wrong Password');return;}
+      const job={title:title.value,desc:desc.value,lastDate:lastDate.value};
+      const jobs=JSON.parse(localStorage.getItem('jobs')||'[]');
+      jobs.unshift(job);
+      localStorage.setItem('jobs',JSON.stringify(jobs));
+      form.reset();
+      renderList();
+      alert('✅ Job Added Successfully!');
+    });
+  </script>
+</body>
+</html>
